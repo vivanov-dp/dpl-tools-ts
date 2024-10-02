@@ -70,7 +70,7 @@ class MyClass {
       throw new Error('Invalid data object');
     }
     
-    return augmentObject(MyClass, object);
+    return augmentObject(MyClass, object) as MyClass;
   }
   
   sum() {
