@@ -1,0 +1,39 @@
+{
+  "name": "@deeperplane/tools-ts",
+  "version": "1.0.0",
+  "description": "Deeper Plane TS tools",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivanov-dp/dpl-tools-ts.git"
+  },
+  "keywords": [
+    "deeperplane",
+    "tools",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Velko Ivanov",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/vivanov-dp/dpl-tools-ts/issues"
+  },
+  "homepage": "https://github.com/vivanov-dp/dpl-tools-ts#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2"
+  }
+}
