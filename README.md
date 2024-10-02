@@ -18,28 +18,67 @@ The use of these functions is to convert a generic object instance, as returned 
 with a server, into an instance of a class that has properties and methods, to make it convenient to work with 
 in Typescript.
     
-    ```typescript
-    import { augmentObject, augmentArray } from '@deeperplane/tools';
+```typescript
+import { augmentObject } from '@deeperplane/tools';
 
-    const obj = { a: 1, b: 2 };
-    class MyClass {
-        a: number = 0;
-        b: number = 0;
-        sum() {
-            return this.a + this.b;
-        }
+const obj = { a: 1, b: 2 };
+class MyClass {
+    a: number = 0;
+    b: number = 0;
+    sum() {
+        return this.a + this.b;
     }
-    const myClass = augmentObject(MyClass, obj);
+}
+const myClass = augmentObject(MyClass, obj);
 
-    console.log(myClass.sum()); // 3
-    
-    const arr = [1, 2, 3];
-    class MyArray extends Array<number> {
-        sum() {
-            return this.reduce((acc, val) => acc + val, 0);
-        }
+console.log(myClass.sum()); // 3
+```
+
+```typescript
+import { augmentArray } from '@deeperplane/tools';
+
+const arr = [1, 2, 3];
+class MyArray extends Array<number> {
+    get second() {
+        return this[1];
     }
-    const myArray = augmentArray(MyArray, arr);
+    sum() {
+        return this.reduce((acc, val) => acc + val, 0);
+    }
+}
+const myArray = augmentArray(MyArray, arr);
+
+console.log(myArray.sum()); // 6
+console.log(myArray.second); // 2
+```
+
+```typescript
+import {augmentObject} from '@deeperplane/tools';
+
+const obj = {a: 1, b: 2};
+
+class MyClass {
+  a: number = 0;
+  b: number = 0;
+
+  static isInstance(object: any): boolean {
+    return (typeof object.a === 'number' && typeof object.b === 'number');
+  }
+
+  constructor(object: any) {
+    if (!MyClass.isInstance(object)) {
+      throw new Error('Invalid data object');
+    }
     
-    console.log(myArray.sum()); // 6
-    ```
+    return augmentObject(MyClass, object);
+  }
+  
+  sum() {
+    return this.a + this.b;
+  }
+}
+
+const myClass = new MyClass(obj);
+
+console.log(myClass.sum()); // 3
+```
