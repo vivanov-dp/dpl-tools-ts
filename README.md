@@ -52,33 +52,43 @@ console.log(myArray.sum()); // 6
 console.log(myArray.second); // 2
 ```
 
+## DTO tools
+
+- class DTO
+
+This class is a base class for creating Data Transfer Objects. Currently, it serves more as a documentation tool,
+setting a basic framework for creating DTO classes.
+
 ```typescript
-import {augmentObject} from '@deeperplane/tools';
+import { proxy, DTO } from '@deeperplane/tools';
 
-const obj = {a: 1, b: 2};
-
-class MyClass {
-  a: number = 0;
-  b: number = 0;
-
-  static isInstance(object: any): boolean {
-    return (typeof object.a === 'number' && typeof object.b === 'number');
-  }
-
-  constructor(object: any) {
-    if (!MyClass.isInstance(object)) {
-      throw new Error('Invalid data object');
+class MyDTO extends DTO {
+    a: number = 0;
+    b: number = 0;
+    
+    sum() {
+        return this.a + this.b;
     }
     
-    return augmentObject(MyClass, object) as MyClass;
-  }
-  
-  sum() {
-    return this.a + this.b;
-  }
+    override static isInstance(obj: any): boolean {
+        return (typeof obj.a === 'number' && typeof obj.b === 'number');
+    }
+    constructor(obj: any) {
+        if (!obj) {
+            super();
+            return this;
+        }
+      
+        if (!MyDTO.isInstance(obj)) {
+            throw new Error('Invalid data object');
+        }
+      
+        return proxy.augmentObject(MyDTO, obj) as MyDTO;
+    }
 }
 
-const myClass = new MyClass(obj);
+const obj = { a: 1, b: 2 };
+const myDTO = new MyDTO(obj);
 
-console.log(myClass.sum()); // 3
+console.log(myDTO.sum()); // 3
 ```

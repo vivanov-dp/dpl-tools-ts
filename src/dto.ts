@@ -9,6 +9,11 @@
  *
  * ```typescript
  *   constructor(object?: any) {
+ *     if (!object) {
+ *       super();
+ *       return this;
+ *     }
+ *
  *     if (!DTO.isInstance(object)) {
  *       throw new Error(`Invalid DTO object: ${JSON.stringify(object)}`);
  *     }

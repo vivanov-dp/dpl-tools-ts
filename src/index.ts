@@ -1,4 +1,4 @@
 import * as proxy from './proxy';
-import * as dto from './dto';
+import { DTO } from './dto';
 
-export { proxy, dto };
+export { proxy, DTO };
