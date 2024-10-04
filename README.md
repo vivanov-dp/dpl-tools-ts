@@ -5,7 +5,7 @@ This is a collection of tools for working in Typescript.
 ## Installation
 
 ```bash
-npm install @deeperplane/tools
+npm install @deeperplane/tools-ts
 ```
 
 ## Proxy objects tools
