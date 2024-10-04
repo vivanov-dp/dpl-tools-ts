@@ -19,15 +19,15 @@ with a server, into an instance of a class that has properties and methods, to m
 in Typescript.
     
 ```typescript
-import { augmentObject } from '@deeperplane/tools';
+import { augmentObject } from '@deeperplane/tools-ts';
 
 const obj = { a: 1, b: 2 };
 class MyClass {
-    a: number = 0;
-    b: number = 0;
-    sum() {
-        return this.a + this.b;
-    }
+  a: number = 0;
+  b: number = 0;
+  sum() {
+    return this.a + this.b;
+  }
 }
 const myClass = augmentObject(MyClass, obj);
 
@@ -35,16 +35,16 @@ console.log(myClass.sum()); // 3
 ```
 
 ```typescript
-import { augmentArray } from '@deeperplane/tools';
+import { augmentArray } from '@deeperplane/tools-ts';
 
 const arr = [1, 2, 3];
 class MyArray extends Array<number> {
-    get second() {
-        return this[1];
-    }
-    sum() {
-        return this.reduce((acc, val) => acc + val, 0);
-    }
+  get second() {
+    return this[1];
+  }
+  sum() {
+    return this.reduce((acc, val) => acc + val, 0);
+  }
 }
 const myArray = augmentArray(MyArray, arr);
 
@@ -60,31 +60,32 @@ This class is a base class for creating Data Transfer Objects. Currently, it ser
 setting a basic framework for creating DTO classes.
 
 ```typescript
-import { proxy, DTO } from '@deeperplane/tools';
+import { proxy, DTO } from '@deeperplane/tools-ts';
 
 class MyDTO extends DTO {
-    a: number = 0;
-    b: number = 0;
+  a: number = 0;
+  b: number = 0;
     
-    sum() {
-        return this.a + this.b;
-    }
+  sum() {
+    return this.a + this.b;
+  }
     
-    override static isInstance(obj: any): boolean {
-        return (typeof obj.a === 'number' && typeof obj.b === 'number');
+  override static isInstance(obj: any): boolean {
+    return (typeof obj.a === 'number' && typeof obj.b === 'number');
+  }
+  constructor(obj: any) {
+    if (!obj) {
+      // At least one call to super() is required, so keep this here
+      super();
+      return this;
     }
-    constructor(obj: any) {
-        if (!obj) {
-            super();
-            return this;
-        }
       
-        if (!MyDTO.isInstance(obj)) {
-            throw new Error('Invalid data object');
-        }
-      
-        return proxy.augmentObject(MyDTO, obj) as MyDTO;
+    if (!MyDTO.isInstance(obj)) {
+      throw new Error('Invalid data object');
     }
+      
+    return proxy.augmentObject(MyDTO, obj) as MyDTO;
+  }
 }
 
 const obj = { a: 1, b: 2 };
