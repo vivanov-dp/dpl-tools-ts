@@ -60,7 +60,7 @@ This class is a base class for creating Data Transfer Objects. Currently, it ser
 setting a basic framework for creating DTO classes.
 
 ```typescript
-import { proxy, DTO } from '@deeperplane/tools-ts';
+import { proxyObj, DTO } from '@deeperplane/tools-ts';
 
 class MyDTO extends DTO {
   a: number = 0;
@@ -84,7 +84,7 @@ class MyDTO extends DTO {
       throw new Error('Invalid data object');
     }
       
-    return proxy.augmentObject(MyDTO, obj) as MyDTO;
+    return proxyObj.augmentObject(MyDTO, obj) as MyDTO;
   }
 }
 
