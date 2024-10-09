@@ -10,10 +10,10 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "jest",
-    "test:changed": "jest -o",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest",
+    "test:changed": "node --experimental-vm-modules node_modules/jest/bin/jest -o",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest --coverage",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest --watch"
   },
 
   "jest" : {

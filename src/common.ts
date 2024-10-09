@@ -68,3 +68,31 @@ export function findLongestSequence<T>(arr: T[], elm: T): [number, number] {
 export function findLongestZeroSequence(arr: string[]): [number, number] {
   return findLongestSequence(arr, '0');
 }
+
+async function importESM(srcPath: string): Promise<any> {
+  try {
+    return await import(srcPath);
+  } catch (error) {
+    throw new Error(`Failed to import module from "${srcPath}": ${(error as Error).message}`);
+  }
+}
+/**
+ * Dynamically imports a function from an ESM module.
+ *
+ * @param srcPath - The path to the ESM file.
+ * @param fnName - The name of the function to import.
+ * @param importer - The function to use for importing the module. Defaults to `import`.
+ * @returns A promise that resolves to the imported function.
+ */
+export async function importFunctionESM(srcPath: string, fnName: string, importer= importESM): Promise<Function> {
+  try {
+    const module = await importer(srcPath);
+    if (module[fnName] && typeof module[fnName] === 'function') {
+      return module[fnName];
+    } else {
+      throw new Error(`"${fnName}" not found or not a function.`);
+    }
+  } catch (error) {
+    throw new Error(`Failed to import function "${fnName}" from "${srcPath}": ${(error as Error).message}`);
+  }
+}
