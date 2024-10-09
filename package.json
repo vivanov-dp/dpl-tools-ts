@@ -15,6 +15,13 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
+
+  "jest" : {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$"
+  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vivanov-dp/dpl-tools-ts.git"
