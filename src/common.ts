@@ -93,6 +93,6 @@ export async function importFunctionESM(srcPath: string, fnName: string, importe
       throw new Error(`"${fnName}" not found or not a function.`);
     }
   } catch (error) {
-    throw new Error(`Failed to import function "${fnName}" from "${srcPath}": ${(error as Error).message}`);
+    throw new Error(`Failed to import function "${fnName}" from "${srcPath}":\n${(error as Error).message}`);
   }
 }
