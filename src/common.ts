@@ -6,6 +6,22 @@ export type Nullable<T> = {
 };
 
 
+/**
+ * Assert that an object has the required keys.
+ * @param data
+ * @param requiredKeys
+ * @param name - The name of the object, for error messages
+ */
+export function assertInterface<T>(data: Partial<T>, requiredKeys: string[], name: string): asserts data is T {
+  if (!data) {
+    throw new Error(`Invalid ${name}: ${JSON.stringify(data)}`);
+  }
+  for (const key of requiredKeys) {
+    if (!(data as any)[key]) {
+      throw new Error(`${name} data missing '${key}': ${JSON.stringify(data)}`);
+    }
+  }
+}
 
 /**
  * Filter an object by its keys, keeping only the ones that start with a given prefix.
