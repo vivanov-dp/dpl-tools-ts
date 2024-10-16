@@ -1,6 +1,6 @@
 {
   "name": "@deeperplane/tools-ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Deeper Plane TS tools",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
